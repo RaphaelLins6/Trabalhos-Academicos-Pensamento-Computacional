@@ -31,3 +31,19 @@ Integrar a teoria da evolução das máquinas computacionais com a prática de i
 - [@RaphaelLins6](https://www.github.com/RaphaelLins6) - Raphael Lins (RGM:27797660)
 - [@jotape99](https://www.github.com/jotape99) - João Pedro (RGM:28167333)
 - [@joaogkt](https://www.github.com/joaogkt) - João Gabriel (RGM:28017188)
+
+---
+
+## Referências
+
+1. **Google Maps Platform Documentation**  
+   Documentação oficial do Google Maps Platform, que fornece informações detalhadas sobre como utilizar APIs e ferramentas para integração com aplicações.  
+   [https://developers.google.com/maps/documentation](https://developers.google.com/maps/documentation)
+
+2. **Pulp Documentation**  
+   Guia oficial da biblioteca Pulp para resolver problemas de otimização linear em Python.  
+   [https://coin-or.github.io/pulp/](https://coin-or.github.io/pulp/)
+
+3. **Selenium Documentation**  
+   Documentação oficial do Selenium, uma ferramenta para automação de navegadores.  
+   [https://www.selenium.dev/documentation/](https://www.selenium.dev/documentation/)
