@@ -22,8 +22,9 @@ def esta_na_aba_de_rotas():
     botao_rotas = driver.find_elements(By.XPATH, xpath)
     return len(botao_rotas) > 0
 
-def busca_endereco(endereco, num_caixa = 1):
+def busca_endereco(endereco, num_caixa=1):
     if not esta_na_aba_de_rotas():
+        print("Não está na aba de rotas. Buscando endereço na barra de pesquisa.")
         busca_vazia = driver.find_element(By.ID, 'searchboxinput')
         busca_vazia.clear()
         sleep(2)
@@ -32,16 +33,17 @@ def busca_endereco(endereco, num_caixa = 1):
         busca_vazia.send_keys(Keys.RETURN)
         sleep(2)
     else:
+        print(f"Está na aba de rotas. Tentando buscar endereço na caixa {num_caixa}.")
         caixas = driver.find_elements(By.XPATH, '//div[contains(@id, "directions-searchbox")]//input')
         caixas = [c for c in caixas if c.is_displayed()]
         if len(caixas) >= num_caixa:
-            caixa_endereço = caixas[num_caixa-1]
-            caixa_endereço.send_keys(Keys.CONTROL + 'a')
-            caixa_endereço.send_keys(Keys.DELETE)
-            caixa_endereço.send_keys(endereco)
-            caixa_endereço.send_keys(Keys.RETURN)
+            caixa_endereco = caixas[num_caixa - 1]
+            caixa_endereco.send_keys(Keys.CONTROL + 'a')
+            caixa_endereco.send_keys(Keys.DELETE)
+            caixa_endereco.send_keys(endereco)
+            caixa_endereco.send_keys(Keys.RETURN)
         else:
-            print(f'Não conseguimos adicionar o endereço {len (caixas)}|{num_caixa}')
+            print(f"Não conseguimos adicionar o endereço. Caixas disponíveis: {len(caixas)}, Caixa solicitada: {num_caixa}")
 
 def define_rota(driver):
     wait = WebDriverWait(driver, timeout=10)
@@ -65,22 +67,32 @@ def define_rota(driver):
         print(f"Erro ao definir rota: {e}")
 
 
-def adiciona_caixa_destino():
-    xpath = '//span[@class="ExQYxb google-symbols"]'
-    wait = WebDriverWait(driver,timeout=2)
-    wait.until(EC.visibility_of_all_elements_located((By.XPATH,xpath)))
-
-    adiciona_destino = driver.find_element(By.XPATH,xpath)
-
-    adiciona_destino.click()
-
-
 def seleciona_tipo_conducao():
     xpath = '//*[@id="omnibox-directions"]/div/div[2]/div/div/div/div[2]/button/div[1]'
-    wait = WebDriverWait(driver,timeout=3)
-    botao_conducao = wait.until(EC.presence_of_element_located((By.XPATH,xpath)))
-    botao_conducao.click()
+    wait = WebDriverWait(driver, timeout=3)
 
+    try:
+        print("Tentando localizar o botão de tipo de condução...")
+        botao_conducao = wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
+        print("Botão de tipo de condução localizado, tentando clicar...")
+        botao_conducao.click()
+        print("Tipo de condução selecionado com sucesso!")
+    except Exception as e:
+        print(f"Erro ao selecionar tipo de condução: {e}")
+
+
+def adiciona_caixa_destino():
+    xpath = '//*[@id="omnibox-directions"]/div/div[3]/button'
+    wait = WebDriverWait(driver, timeout=2)
+
+    try:
+        print("Tentando localizar o botão de adicionar destino...")
+        adiciona_destino = wait.until(EC.element_to_be_clickable((By.XPATH, xpath)))
+        print("Botão localizado, tentando clicar...")
+        adiciona_destino.click()
+        print("Caixa de destino adicionada com sucesso!")
+    except Exception as e:
+        print(f"Erro ao adicionar caixa de destino: {e}")
 
 def retorna_tempo_total():
     xpath = '//div[@id="section-directions-trip-0"]//div[contains(text(),"min")]'
@@ -163,14 +175,25 @@ def gera_otimizacao(enderecos, distancia_pares):
 def mostra_rota_otimizada(enderecos, rota):
     driver.get("https://www.google.com/maps")
 
+    print("Buscando o primeiro endereço...")
     busca_endereco(enderecos[0], 1)
     define_rota(driver)
 
     for i in range(len(rota)):
-        busca_endereco(enderecos[rota[i][0]], i+1)
+        print(f"Adicionando destino para a rota {i}")
+        busca_endereco(enderecos[rota[i][0]], i + 1)
+        sleep(5)  # Aguarde antes de adicionar a caixa de destino
+        print("Antes de adicionar caixa de destino")
         adiciona_caixa_destino()
+        print("Depois de adicionar caixa de destino")
     
+    print("Buscando o endereço final...")
     busca_endereco(enderecos[0], len(enderecos) + 1)
+
+    # Mensagem final de depuração
+    print("Rota encontrada!")
+    sleep(10)  # Aguarde 10 segundos antes de fechar o programa
+    driver.quit()  # Fecha o navegador
     
 
 if __name__ == "__main__":
@@ -180,10 +203,6 @@ if __name__ == "__main__":
                 "Asa Norte Entrequadra Norte 504/505 Bloco A - Asa Norte, Brasília - DF, 70760-545", 
                 "Shc/sul Eq, 402/403 - Asa Sul, Brasília - DF, 70236-400", 
                 "Shc/sul EQ, 310 BL A - Asa Sul, Brasília - DF, 70364-400",
-                "SCEE / Sul Lote B - Guará, Brasília - DF, 71215-300",
-                "SHI/SUL QI 13 Bloco J - Lago Sul, Brasília - DF, 71635-013",
-                "Shis QI, DF-025, Lote, G - Lago Sul, Brasília - DF, 71660-200",
-                "R. Copaíba, S/N - Lote 01 Mezanino 1B Loja 1B Norte - Águas Claras, Brasília - DF, 70297-400"
     ]
 
 
