@@ -50,6 +50,6 @@ Integrar a teoria da evolução das máquinas computacionais com a prática de i
    Documentação oficial do Selenium, uma ferramenta para automação de navegadores.  
    [https://www.selenium.dev/documentation/](https://www.selenium.dev/documentation/)
 
-4. **Caixeiro viajante**
-   Vídeo explicativo sobre o problema clássico da computação.
+4. **Caixeiro viajante** 
+   Vídeo explicativo sobre o problema clássico da computação. 
    [https://youtu.be/3L2oI4GEbbA?si=kXj-LAOJtSEtsYKo](https://youtu.be/3L2oI4GEbbA?si=kXj-LAOJtSEtsYKo)
