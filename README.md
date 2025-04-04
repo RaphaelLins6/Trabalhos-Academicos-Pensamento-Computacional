@@ -1,4 +1,6 @@
-# Projeto Kadidja - Otimizador de Rotas
+# Trabalho de Pensamento computacional
+## Problema do caixeiro viajante
+## Solução: Otimizador de Rotas
 
 ## Descrição
 
@@ -50,5 +52,4 @@ Integrar a teoria da evolução das máquinas computacionais com a prática de i
 
 4. **Caixeiro viajante**
    Vídeo explicativo sobre o problema clássico da computação.
-
-[https://youtu.be/3L2oI4GEbbA?si=kXj-LAOJtSEtsYKo](https://youtu.be/3L2oI4GEbbA?si=kXj-LAOJtSEtsYKo)
+   [https://youtu.be/3L2oI4GEbbA?si=kXj-LAOJtSEtsYKo](https://youtu.be/3L2oI4GEbbA?si=kXj-LAOJtSEtsYKo)
