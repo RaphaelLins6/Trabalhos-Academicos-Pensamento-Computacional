@@ -52,3 +52,11 @@ Integrar a teoria da evolução das máquinas computacionais com a prática de i
 4. 🎥 **Caixeiro Viajante**  
    Vídeo explicativo sobre o problema clássico da computação.  
    [https://youtu.be/3L2oI4GEbbA?si=kXj-LAOJtSEtsYKo](https://youtu.be/3L2oI4GEbbA?si=kXj-LAOJtSEtsYKo)
+
+---
+
+## 📜 Licença
+
+Este projeto é livre para uso e modificação. Contribuições são bem-vindas! 😊
+
+---
